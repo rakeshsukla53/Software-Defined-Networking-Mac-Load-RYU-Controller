@@ -69,9 +69,10 @@ def packet_count_printer(counts):
 	print counts
 
 def packet_counts():
-	q= count_packets(1,['10.0.0.1', '10.0.0.1'])
+	q= count_packets(1,['srcip ', 'dstip'])
 	q.register_callback(packet_count_printer)
-	return q
+	monitor = match(srcip='10.0.0.1', dstip='10.0.0.1') >> q 
+	return q 
     
 def main():
     return (ActLikeSwitch() + packet_counts())  
